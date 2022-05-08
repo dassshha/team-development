@@ -15,6 +15,10 @@ def load_image(name, colorkey=None):
 
 
 class Info(pygame.sprite.Sprite):  # кнопка "информация" на главном экране(слева)
+    '''
+     кнопка "информация" на главном экране(слева)
+    '''
+    
     image1 = load_image("info.png")
     image2 = load_image("info1.png")
     imn = load_image("nothing.png")
@@ -28,6 +32,10 @@ class Info(pygame.sprite.Sprite):  # кнопка "информация" на г
         self.vekt = 0
 
     def is_on(self, x, y):  # реакция кнопки на наведение курсора на нее
+        '''
+        реакция кнопки на наведение курсора на нее
+        '''
+        
         if x in range(self.rect.x, self.rect.x + self.rect.w + 1) and y in range(self.rect.y,
                                                                                  self.rect.y + self.rect.h + 1):
             self.vekt = 1
@@ -35,11 +43,19 @@ class Info(pygame.sprite.Sprite):  # кнопка "информация" на г
             self.vekt = 0
 
     def click(self, x, y):  # нажатие
+        '''
+        нажатие
+         '''
+        
         if x in range(self.rect.x, self.rect.x + self.rect.w + 1) and y in range(self.rect.y,
                                                                                  self.rect.y + self.rect.h + 1):
             return True
 
     def update(self):  # изменение при нажатии или наведении курсора на кнопку
+        '''
+        изменение при нажатии или наведении курсора на кнопку
+        '''
+        
         if self.vekt == 3:
             self.image = Info.imn
         elif self.vekt == 0:
@@ -49,6 +65,10 @@ class Info(pygame.sprite.Sprite):  # кнопка "информация" на г
 
 
 class Settings(pygame.sprite.Sprite):  # кнопка, открывающая окно об авторах проекта
+    '''
+    кнопка, открывающая окно об авторах проекта
+    '''
+    
     image = load_image("settings.png")
     image1 = load_image("settings1.png")
     imn = load_image("nothing.png")
@@ -83,6 +103,10 @@ class Settings(pygame.sprite.Sprite):  # кнопка, открывающая о
 
 
 class Start(pygame.sprite.Sprite):  # кнопка "старт", т.е. начало игры
+    '''
+     кнопка "старт", т.е. начало игры
+    '''
+    
     image = load_image("play.png")
     image1 = load_image("play1.png")
     imn = load_image("nothing.png")
@@ -117,6 +141,10 @@ class Start(pygame.sprite.Sprite):  # кнопка "старт", т.е. нача
 
 
 class Match(pygame.sprite.Sprite):  # спрайты, которые пользователь видит, когда выбирает уровень сложности
+    '''
+     спрайты, которые пользователь видит, когда выбирает уровень сложности
+    '''
+    
     image = load_image("match.png")
     imn = load_image("nothing.png")
     image1 = load_image("matched.png")
@@ -139,9 +167,17 @@ class Match(pygame.sprite.Sprite):  # спрайты, которые польз�
         self.k = 0
 
     def get_name(self):  # возвращает номер спрайта от 1 до 3(функция используется для расставления всех страйтов)
+        '''
+        возвращает номер спрайта от 1 до 3(функция используется для расставления всех страйтов)
+        '''
+        
         return self.i
 
     def set_gr(self, gr):  # добавление спрайта в группу
+        '''
+         добавление спрайта в группу
+        '''
+        
         gr.add(self)
 
     def clear(self):  # вернуться назад
@@ -161,6 +197,10 @@ class Match(pygame.sprite.Sprite):  # спрайты, которые польз�
 
 
 class Reload(pygame.sprite.Sprite):  # спрайт "играть заново" при проигрыше
+    '''
+     спрайт "играть заново" при проигрыше
+    '''
+    
     image = load_image("reload.png")
     image1 = load_image("reload1.png")
     imn = load_image("nothing.png")
@@ -195,6 +235,10 @@ class Reload(pygame.sprite.Sprite):  # спрайт "играть заново" 
 
 
 class Exit(pygame.sprite.Sprite):  # кнопка "выйти" при проигрыше
+    '''
+    кнопка "выйти" при проигрыше
+    '''
+    
     image = load_image("exit.png")
     image1 = load_image("exit1.png")
     imn = load_image("nothing.png")
@@ -229,6 +273,10 @@ class Exit(pygame.sprite.Sprite):  # кнопка "выйти" при проиг
 
 
 class Heart(pygame.sprite.Sprite):  # сердца, или количество жизней, которые есть у Марио
+    '''
+    сердца, или количество жизней, которые есть у Марио
+    '''
+    
     image = load_image("heart.png")
 
     def __init__(self, x, y, *gr):
@@ -240,6 +288,10 @@ class Heart(pygame.sprite.Sprite):  # сердца, или количество 
 
 
 class Quit(pygame.sprite.Sprite):  # кнопка выхода из игры при победе
+    '''
+    кнопка выхода из игры при победе
+    '''
+    
     image = load_image("onoff.png")
     image1 = load_image("onoff1.png")
     imn = load_image("nothing.png")
@@ -274,6 +326,10 @@ class Quit(pygame.sprite.Sprite):  # кнопка выхода из игры п�
 
 
 class Next(pygame.sprite.Sprite):  # кнопка "продолжить играть"  после победы
+    '''
+    кнопка "продолжить играть"  после победы
+    '''
+    
     image = load_image("next.png")
     image1 = load_image("next1.png")
     imn = load_image("nothing.png")
@@ -308,6 +364,10 @@ class Next(pygame.sprite.Sprite):  # кнопка "продолжить игра
 
 
 class Finish(pygame.sprite.Sprite):  # дерево и табличка в конце уровней
+    '''
+     дерево и табличка в конце уровней
+    '''
+    
     image = load_image("Tree_fin.png")
     image = pygame.transform.scale(image, (300, 300))
 
@@ -317,3 +377,23 @@ class Finish(pygame.sprite.Sprite):  # дерево и табличка в ко�
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+  
+class Clouds(pygame.sprite.Sprite):  # облака
+    cloud_image = load_image("cloud.png")
+    cloud_image = pygame.transform.scale(cloud_image, (250, 125))
+    chert_image = load_image("chert.png")
+    chert_image = pygame.transform.scale(chert_image, (250, 100))
+
+    def __init__(self, cl, flag, *gr):
+        if flag:  # облака на первом и втором уровнях
+            super().__init__(gr)
+            self.image = Clouds.cloud_image
+            self.rect = self.image.get_rect()
+            self.rect.x = cl
+            self.rect.y = random.randint(0, 150)
+        else:  # облака на третьем уровне
+            super().__init__(gr)
+            self.image = Clouds.chert_image
+            self.rect = self.image.get_rect()
+            self.rect.x = cl
+            self.rect.y = random.randint(0, 120)
