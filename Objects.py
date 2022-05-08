@@ -140,3 +140,59 @@ class MobGumba(pygame.sprite.Sprite):  # класс мобов, которые �
 
     def sound(self):  # то же самое, что и в классе выше
         self.snd = False
+
+
+class MobBonus(pygame.sprite.Sprite):  # класс бонуса - сундучка, который дает 200 очков и 1 жизнь
+    def __init__(self, x, y, *groups):
+        super().__init__(*groups)
+        self.image = load_image("bonus.png")
+        self.mob_mask = pygame.mask.from_surface(self.image)
+        self.group = groups
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y - self.rect.h
+        self.check = 0
+        self.xod = 0
+        self.coll = 0
+        self.killed = False
+        self.count_mus = 0
+        self.snd = True
+        # то же самое, что и в классе выше
+
+    def update(self):  # то же самое, что и в классе выше
+        if not self.killed:
+            self.xod += 1
+        if self.xod == 40:
+            self.xod = 0
+
+    def move(self):  # нужна для того, чтобы не было ошибки в Main.py
+        pass
+
+    def fall(self, hero, shoting, *args):  # то же самое, что и в классе выше
+        if not shoting and pygame.sprite.collide_mask(self, hero):
+            if self.check == 0:
+                self.coll = 1
+        if self.coll == 1:
+            self.image = load_image("text_bonus.png")
+            self.killed = True
+            self.check = 1
+            self.rect.y -= 9
+            if self.rect.y >= 800:
+                self.remove(self.group)
+
+    def check_fall(self):  # то же самое, что и в классе выше
+        if self.count_mus == 0:
+            if self.coll == 1:
+                self.count_mus = 1
+                return True
+        return False
+
+    def get_coords(self):  # то же самое, что и в классе выше
+        return [self.rect.x, self.rect.y, self.coll]
+
+    def again(self):  # то же самое, что и в классе выше
+        pass
+
+    def sound(self):  # то же самое, что и в классе выше
+        self.snd = False
+
