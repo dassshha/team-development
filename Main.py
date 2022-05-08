@@ -147,7 +147,7 @@ def start_screen(LENTH):  # начальный экран + вкладка "ав
         msp.draw(screen)
         if writer:
             intro_text = ["                         Авторы:", "", "",
-                          "  Жгулева Дарья    Дикобаева Анастасия"]
+                          "  Жгулёва Дарья    Дикобаева Анастасия"]
             font = pygame.font.Font('Data/Mario_font.ttf', 12)
             text_coord = 230
             for line in intro_text:
@@ -199,3 +199,64 @@ def start_screen(LENTH):  # начальный экран + вкладка "ав
                 screen.blit(string_rendered, intro_rect)
         pygame.display.flip()
         clock.tick(30)
+
+
+def lost(fps):  # проигрыш
+    pygame.init()
+    size = WIDTH, HEIGHT
+    screen = pygame.display.set_mode(size)
+    pygame.display.set_caption('Mario ultra 2021')
+    image = load_image("mario_start.png")
+    pygame.display.set_icon(image)
+    fps_cahnge = fps
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        elif event.type == pygame.MOUSEMOTION:
+            zn = True
+            for el in mn:
+                if el.vekt == 3:
+                    zn = False
+            if zn:
+                for el in mn:
+                    x, y = event.pos
+                    el.is_on(x, y)
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            x, y = event.pos
+            if reload_but.click(x, y) and reload_but.vekt != 3:
+                for el in mn:
+                    el.vekt = 3
+                return 3
+            elif exit_but.click(x, y) and exit_but.vekt != 3:
+                for el in mn:
+                    el.vekt = 3
+                print("U just can't win...")
+                pygame.quit()
+                sys.exit()
+    screen.fill((0, 0, 0))
+    if LENTH <= 5000:
+        screen.blit(load_image("fon_level1.png"), (0, 0))
+    elif LENTH == 30000:
+        screen.blit(load_image("fon_level2.jpg"), (0, 0))
+    elif LENTH >= 50000:
+        screen.blit(load_image("fon_level3.png"), (0, 0))
+    mob_sprites.draw(screen)
+    all_sprites.draw(screen)
+    entities.draw(screen)
+    if fps_cahnge == 1:
+        image_lost = load_image('game_over.png')
+        screen.blit(image_lost, (0, 0))
+    elif fps_cahnge == 2:
+        image_lost1 = load_image('game_over1.png')
+        screen.blit(image_lost1, (0, 0))
+    elif fps_cahnge == 3:
+        image_lost1 = load_image('game_over2.png')
+        screen.blit(image_lost1, (0, 0))
+    button_end_sprites.update()
+    button_end_sprites.draw(screen)
+    image = load_image("mario_start.png")
+    pygame.display.set_icon(image)
+    clock.tick(10)
+    pygame.display.flip()
+    return 0
